@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -11,8 +11,21 @@ import Box from '@mui/material/Box';
 import { itemData } from '../services';
 import { SortableItem } from './SortableItem';
 
+type ItemType = {
+  id: string;
+  img: string;
+  title: string;
+};
+
 export const ContentGrid = () => {
-  const [items, setItems] = useState(itemData);
+  const [items, setItems] = useState<ItemType[]>(() => {
+    const savedItems = localStorage.getItem('items');
+    return savedItems ? JSON.parse(savedItems) : itemData;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
