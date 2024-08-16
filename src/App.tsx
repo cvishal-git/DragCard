@@ -1,6 +1,5 @@
-import { Box, Container, CssBaseline } from '@mui/material';
-import { Card } from './components';
-import { ResponsiveGrid } from './components/Grid';
+import { Box, CssBaseline } from '@mui/material';
+import { ContentGrid } from './components/';
 
 const App = () => {
   return (
@@ -15,7 +14,7 @@ const App = () => {
           width: '100vw',
         }}
       >
-        <ResponsiveGrid />
+        <ContentGrid />
       </Box>
     </>
   );
