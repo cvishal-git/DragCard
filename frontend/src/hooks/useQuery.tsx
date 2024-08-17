@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type ItemType = {
+export type ItemType = {
   id: string;
   img: string;
   title: string;
@@ -8,7 +8,7 @@ type ItemType = {
 
 export const useQuery = () => {
   const [data, setData] = useState<ItemType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const handleData = (dragEndData: ItemType[]) => setData(dragEndData);
@@ -29,11 +29,13 @@ export const useQuery = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const savedItems = localStorage.getItem('items');
     if (savedItems == null || JSON.parse(savedItems).length === 0) {
       fetchData();
     } else {
       setData(JSON.parse(savedItems));
+      setLoading(false);
     }
   }, []);
 
