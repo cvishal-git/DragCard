@@ -26,6 +26,7 @@ git clone https://github.com/cvishal-git/DragCard.git
 Use Yarn to install the required dependencies:
 
 ```bash
+cd frontend/
 yarn install
 ```
 
